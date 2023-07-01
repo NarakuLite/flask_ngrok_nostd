@@ -68,17 +68,10 @@ def _download_file(url):
 
 def start_ngrok():
     ngrok_address = _run_ngrok()
-    print(f" * Running on {ngrok_address}")
-    print(f" * Traffic stats available on http://127.0.0.1:4040")
+    return ngrok_address
 
 
 def run_with_ngrok(app):
-    """
-    The provided Flask app will be securely exposed to the public internet via ngrok when run,
-    and the its ngrok address will be printed to stdout
-    :param app: a Flask application object
-    :return: None
-    """
     old_run = app.run
 
     def new_run():
