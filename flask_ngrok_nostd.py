@@ -27,8 +27,8 @@ def _run_ngrok():
         raise Exception(f"{system} is not supported")
     executable = str(Path(ngrok_path, command))
     os.chmod(executable, 777)
-
-    ngrok = subprocess.Popen([executable, 'http', '5000'])
+    devnull = open(os.devnull, 'w')
+    ngrok = subprocess.Popen([executable, 'http', '5000'], stdout=devnull, stderr=devnull)
     atexit.register(ngrok.terminate)
     localhost_url = "http://localhost:4040/api/tunnels"  # Url with tunnel details
     time.sleep(1)
